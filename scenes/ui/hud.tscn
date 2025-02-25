@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://jruwyjbr1gm6"]
+
+[ext_resource type="Script" path="res://scenes/ui/hud.gd" id="1_xwowf"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_xwowf")
+
+[node name="LeftScore" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="RightScore" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="GameStatus" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0

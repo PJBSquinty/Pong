@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://wmt3k7f7b4in"]
+
+[ext_resource type="Script" path="res://scenes/entities/paddle.gd" id="1_24vuk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tulr4"]
+
+[node name="Paddle" type="CharacterBody2D"]
+script = ExtResource("1_24vuk")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_tulr4")
