@@ -1,3 +1,41 @@
-[gd_scene format=3 uid="uid://c2jab325r80wg"]
+[gd_scene load_steps=7 format=3 uid="uid://c2jab325r80wg"]
+
+[ext_resource type="Script" path="res://scenes/game/game_manager.gd" id="1_xiiuh"]
+[ext_resource type="PackedScene" uid="uid://bo1wetcjohawq" path="res://scenes/entities/wall.tscn" id="2_ylgy4"]
+[ext_resource type="PackedScene" uid="uid://wmt3k7f7b4in" path="res://scenes/entities/paddle.tscn" id="3_rvv3e"]
+[ext_resource type="PackedScene" uid="uid://d2v486w3yp31y" path="res://scenes/entities/ball.tscn" id="4_4jmib"]
+[ext_resource type="PackedScene" uid="uid://cqovxs677st3d" path="res://scenes/entities/goal.tscn" id="5_tk5ag"]
+[ext_resource type="PackedScene" uid="uid://jruwyjbr1gm6" path="res://scenes/ui/hud.tscn" id="6_etu74"]
 
 [node name="MainGame" type="Node2D"]
+script = ExtResource("1_xiiuh")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(1152, 648)
+offset_right = 1024.0
+offset_bottom = 600.0
+color = Color(0, 0, 0, 1)
+
+[node name="Walls" type="Node2D" parent="."]
+
+[node name="TopWall" parent="Walls" instance=ExtResource("2_ylgy4")]
+
+[node name="BottomWall" parent="Walls" instance=ExtResource("2_ylgy4")]
+position = Vector2(0, 628)
+
+[node name="LeftPaddle" parent="." instance=ExtResource("3_rvv3e")]
+position = Vector2(20, 264)
+
+[node name="RightPaddle" parent="." instance=ExtResource("3_rvv3e")]
+position = Vector2(1122, 264)
+player_number = 2
+
+[node name="Ball" parent="." instance=ExtResource("4_4jmib")]
+
+[node name="LeftGoal" parent="." instance=ExtResource("5_tk5ag")]
+
+[node name="RightGoal" parent="." instance=ExtResource("5_tk5ag")]
+position = Vector2(1132, 0)
+player_number = 2
+
+[node name="HUD" parent="." instance=ExtResource("6_etu74")]

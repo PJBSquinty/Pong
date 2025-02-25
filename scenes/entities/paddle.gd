@@ -1,28 +1,40 @@
 extends CharacterBody2D
 
+# Paddle movement speed
+@export var speed = 400.0
+# Player number (1 for left, 2 for right)
+@export var player_number = 1
 
-const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
+# Get the gravity from the project settings to be synced with RigidBody nodes
+var screen_size
 
-# Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-
+func _ready():
+	# Get the viewport size
+	screen_size = get_viewport_rect().size
 
 func _physics_process(delta):
-	# Add the gravity.
-	if not is_on_floor():
-		velocity.y += gravity * delta
-
-	# Handle Jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction = Input.get_axis("ui_left", "ui_right")
-	if direction:
-		velocity.x = direction * SPEED
+	# Handle Input
+	var direction = 0
+	
+	if player_number == 1:
+		# Player 1 controls (left paddle)
+		if Input.is_action_pressed("p1_up"):
+			direction = -1
+		elif Input.is_action_pressed("p1_down"):
+			direction = 1
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-
+		# Player 2 controls (right paddle)
+		if Input.is_action_pressed("p2_up"):
+			direction = -1
+		elif Input.is_action_pressed("p2_down"):
+			direction = 1
+	
+	# Set the velocity - multiply by delta for frame-rate independence
+	velocity.y = direction * speed * delta * 60.0
+	
+	# Move the paddle
 	move_and_slide()
+	
+	# Clamp position to screen edges (with a small margin)
+	var half_height = $CollisionShape2D.shape.size.y / 2
+	position.y = clamp(position.y, half_height, screen_size.y - half_height)

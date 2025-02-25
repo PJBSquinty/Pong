@@ -1,13 +1,24 @@
-[gd_scene load_steps=3 format=3 uid="uid://d2v486w3yp31y"]
+[gd_scene load_steps=5 format=3 uid="uid://d2v486w3yp31y"]
 
 [ext_resource type="Script" path="res://scenes/entities/ball.gd" id="1_1ejbt"]
+[ext_resource type="AudioStream" uid="uid://dgbl80id4hjhv" path="res://assets/audio/ping_pong_8bit_beeep.wav" id="2_bfwsp"]
+[ext_resource type="AudioStream" uid="uid://byib83fr6f6r3" path="res://assets/audio/pong.wav" id="3_tfplw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nr631"]
+size = Vector2(10, 10)
 
-[node name="Ball" type="CharacterBody2D"]
+[node name="Ball" type="CharacterBody2D" groups=["ball"]]
 script = ExtResource("1_1ejbt")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="ColorRect" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(10, 10)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(5, 5)
 shape = SubResource("RectangleShape2D_nr631")
+
+[node name="BounceSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_bfwsp")
+
+[node name="ScoreSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_tfplw")
